@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+
+
+
+    <style>
+        /*Variables*/
+        :root {
+            --blue: #094B6D;
+            --postBackGround: #F6F6F6;
+        }
+
+        /*General*/
+        * {
+           box-sizing: border-box;
+           margin: 0;
+           padding: 0;
+           font-family: 'Roboto', sans-serif;
+            color: #FFFFFF;
+        }
+
+        body {
+            background: var(--postBackGround)!important;
+        }
+
+        h1{
+            font-size: 33px;
+            color: black!important;
+            padding-top: 15px;
+        }
+        a {
+            text-decoration: none;
+            
+        }
+
+        li {
+            font-size: 13px;
+            list-style-type: none;
+        }
+         /*General End*/
+
+        /*** Header ***/
+        .headerLinks{
+            height: 28px;
+            width: 100%;
+            background: #00344F;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .headerLinks a {
+            text-decoration: underline;
+        }
+
+        .toRight {
+            text-align: right;
+            margin-right: 16px;
+        }
+
+        .headerLogoContainter {
+            width: 100%;
+            height: 70px;
+            background: #F7F7F7;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }    
+        #mobileNav {
+            width: 333px;
+            height: 37px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #navMenu {
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            z-index: 10;
+            background: var(--blue);
+            opacity: 0.9;
+            top: 0;
+            left: -100%;
+            transition: 1s;
+        }
+
+        #navMenu a, #close{
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        #close {
+            text-align: right;
+            padding: 20px;
+            height: 10%;
+        }
+
+        #navMenu ul {
+            height: 90%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 10px;
+        }
+
+
+        #desktopNav {
+            display: none;
+            width: 770px;
+
+            height: 100%;
+          
+        }
+
+        #desktopNav a{
+            text-decoration: none;
+            font-size: 13px;
+
+            width: auto;
+        }
+
+        .headerLogoContainerDesktop {
+            width: 100%;
+            height: 109px;
+            background: var(--postBackGround);
+            
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .desktopLogoContainer, .desktopButtonsContainer {
+            width: 50%;
+            height: 100%;
+        }
+
+        .desktopLogoContainer {
+            padding-left: 30px;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .desktopButtonsContainer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .desktopButtonsContainer input {
+            max-width: 284px;
+            width: 30%;
+            height: 39px;
+            background: #FFFFFF;
+            border: 1px solid #DFDFDF;
+            box-sizing: border-box;
+            border-radius: 18px;
+        }
+
+        input[type="text"]::placeholder {  
+            padding-left: 10px; 
+        } 
+
+        .desktopButtonsContainer p {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 18px;
+            color: #000000;
+            margin-left: 36px;
+            margin-right: 16px;
+        }
+
+        .desktopButtonsContainer button {
+            width: 104px;
+            height: 39px;
+            background: #FA9B00;
+            border-radius: 21px;
+            border: none;
+            margin-right: 28px;
+            margin-left: 49px;
+        }
+
+        /*** Header End ***/
+
+        /*** Adds Container ***/
+        .addsContainer {
+            width: 100%;
+            height: 90px;
+            background-color: #FFFFFF;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .addsImgContainer {
+            width: 320px;
+            height: 50px;
+        }
+
+        .desktopAddsContainter {
+            width: 100%;
+            height: 155px;
+            background-color: #FFFFFF;
+
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .addsImgContainerDesktop {
+            width: 780px;
+            height: 90px;
+        }
+        /*** Adds Container End***/
+
+        /*** Main ***/
+
+        /**Featured Events**/
+
+        .events {
+            width: 100%;
+            max-width: 1225px;
+            margin: auto;
+            height: 1524px;
+            background: var(--postBackGround)!important;
+        }
+
+        .events h1 {
+            height: 69px;
+        }
+
+        .events h1 li{
+            font-size: 33px;
+        }
+        .events h1 li{
+            list-style-type: square;
+            padding: 15px;
+        }
+        h1::before {
+            content: "\25AA"; 
+            color: var(--blue); 
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .eventsContainer {
+            width: 100%;
+            height: 1455px;
+            background: var(--postBackGround)!important;
+            padding-bottom: 20px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .newEvent {
+            width: 221px;
+            height: 275px;
+            background: white;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .newEvent p {
+            color: #FA9B00;
+            font-weight: 700!important;
+            font-size: 12px;
+            font-weight: normal;
+            width: 100%;
+            padding: 10px;
+
+        }
+
+        .newEvent img {
+            width: 193px;
+        }
+
+        .date {
+            width: 71%;
+            height: 91px;
+            text-align: center;
+            color: #000000;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .newEventDate {
+            width: 65px;
+            height: 18px;
+            font-size: 12px;
+            font-style: normal;
+            text-decoration: underline;
+            color: var(--blue)!important;
+        }
+
+        .newEventDate a {
+            color: var(--blue);
+        }
+
+        /*** Featured Envents End**/
+
+
+
+        /*** Event Posts ***/
+        .eventPosts {
+            width: 100%;
+            background: var(--postBackGround);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .eventPostPosts {
+            height: 2136px;
+            background: var(--postBackGround);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post {
+            width: 335px;
+            height: 176px;
+            background: #FFFFFF;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .insidePostContainer {
+            height: 136px;
+            width: 291px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .postTdateAndLocation {
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .postInfo {
+            width: 100%;
+            height: 91px;
+
+            display: flex;
+        }
+
+        .titleAndType{
+            padding-left: 11px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .titleAndType h3{
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 16px;
+            color: #000000;
+        }
+
+        .titleAndType a{
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 14px;
+            color: #353535;
+        }
+
+
+        /*** Event Posts End ***/
+
+        /*** Aside ***/
+
+        #eventPostAdds {
+            width: 100%;
+            height: 326px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #eventPostAdds img {
+            margin-bottom: 10px;
+        }
+
+        /*** Aside End ***/
+
+        /*** Main ***/
+
+
+        /*** Media Query ***/
+        /* Desktop */
+        @media screen and (min-width: 1024px) {
+            .headerLinks{
+                justify-content: space-between;
+            }
+
+            #desktopNav {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            .headerLogoContainter {
+                display:none;
+            }
+
+            .headerLogoContainerDesktop {
+                display: flex;
+            }
+
+            .addsContainer {
+                display: none;
+            }         
+
+            .desktopAddsContainter {
+                display: flex;
+            }
+
+            .eventPostPosts {
+                width: 75%!important;
+            }
+
+            .eventPostAdds {
+                width: 25%!important;
+            }
+
+            .post {
+                width: 902px!important;
+                height: 175px;
+            }
+
+            .postInfo {
+                height: 105px;
+            }
+
+            #eventPostAdds {
+                justify-content: flex-end;
+                align-items: flex-start;
+            }
+        }
+
+        /* tablet */
+        @media screen and (min-width: 768px) {
+            .eventsContainer {
+                height: auto;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .eventPosts {
+                flex-direction: row;
+            }
+
+            .eventPostPosts {
+                width: 60%;
+            }
+
+            .eventPostAdds {
+                width: 40%;
+            }
+
+            .post {
+                width: 80%;
+            }
+
+            .insidePostContainer {
+                width: 80%;
+            }
+
+        }
+
+        /* smart phone */
+        @media screen and (max-width: 478px) {}
+        /*** Media Query End***/
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+   <header>
+       <div class="headerLinks">
+            <nav id="desktopNav">        
+                <a href="https://www.rebelmouse.com">Terms of Service</a>
+                <a href="https://www.rebelmouse.com">Privacy Policy</a>
+                <a href="https://www.rebelmouse.com">Trademark and Copyright</a>
+                <a href="https://www.rebelmouse.com">About Us</a>
+                <a href="https://www.rebelmouse.com">Advertise on Reliabilityweb.com</a>
+                <a href="https://www.rebelmouse.com">Steal These Graphics</a>
+            </nav>
+            <ul>
+                <li class="toRight">Visite nuestro sitio en <a href=" https://www.rebelmouse.com">Español</a>  <span>| <a href=" https://www.rebelmouse.com">Español</a></span>  </li>
+            </ul>
+            
+       </div>
+       <div class="headerLogoContainter">
+            <nav id="mobileNav">
+                <div id="menu">
+                    <img src="./img/menu.png" alt="Reliability Web Menu">
+                </div>
+                <div class="logo">
+                    <a href="https://www.rebelmouse.com"><img src="./img/logo.png" alt="Reliability Web Logo"></a>  
+                </div>
+                <div class="search">
+                    <a href="https://www.rebelmouse.com"><img src="./img/search.png" alt="Reliability Web Logo Icon"></a> 
+                </div>
+            </nav>
+            <div id="navMenu">
+                <div id="close"><p>X</p> </div>
+                <ul>
+                    <li><a href="https://www.rebelmouse.com">Terms of Service</a> </li>
+                    <li><a href="https://www.rebelmouse.com">Privacy Policy</a> </li>
+                    <li><a href="https://www.rebelmouse.com">Trademark and Copyright</a> </li>
+                    <li><a href="https://www.rebelmouse.com">About Us</a> </li>
+                    <li><a href="https://www.rebelmouse.com">Advertise on Reliabilityweb.com</a> </li>
+                    <li><a href="https://www.rebelmouse.com">Steal These Graphics</a> </li>
+                </ul>
+            </div>
+       </div>
+       <div class="headerLogoContainerDesktop">
+           <div class="desktopLogoContainer">
+                <img src="./img/LogoDesktop.png" alt="">
+           </div>
+           <div class="desktopButtonsContainer">
+               <input type="text" placeholder="Search">
+               <p>Explore</p><span><img src="./img/More.png" alt=""></span>
+               <button>Subscribe</button>
+           </div>
+       </div>
+
+   </header> 
+    <!-- Header End -->
+
+    <!-- Adds Containder-->
+   <div class="addsContainer">
+       <div class="addsImgContainer">
+           <img src="./img/mobileAdds.webp" alt="Mobile Adds">
+       </div>
+        
+   </div>
+
+   <div class="desktopAddsContainter">
+        <div class="addsImgContainerDesktop">
+            <img src="./img/desktopAdds.png" alt="Desktop Adds">
+        </div>
+   </div>
+    <!-- Adds Containder End-->
+
+    <!--Main-->
+    <main>
+        <section class="events">
+            <h1>Events</h1>
+            <section class="eventsContainer">
+                <div class="newEvent">
+                    <p>Featured Event</p>
+                    <img src="./img/image 63.png" alt="Certified Maintenanace">
+                    <div class="date">January 1, 2021</div>
+                    <div class="newEventDate"><a href="https://www.rebelmouse.com">Lern More</a></div>
+                </div>
+                <div class="newEvent">
+                    <p>Featured Event</p>
+                    <img src="./img/image 63.png" alt="Certified Maintenanace">
+                    <div class="date">January 1 -
+                        December 31, 2021
+                        </div>
+                    <div class="newEventDate"><a href="https://www.rebelmouse.com">Lern More</a></div>
+                </div>
+                <div class="newEvent">
+                    <p>Featured Event</p>
+                    <img src="./img/image 64.png" alt="Certified Maintenanace">
+                    <div class="date">December 13 -
+                        December 16, 2021
+                        Marco Island , Florida</div>
+                    <div class="newEventDate"><a href="https://www.rebelmouse.com">Lern More</a></div>
+                </div>
+                <div class="newEvent">
+                    <p>Featured Event</p>
+                    <img src="./img/image 63.png" alt="Certified Maintenanace">
+                    <div class="date">January 1, 2021</div>
+                    <div class="newEventDate"><a href="https://www.rebelmouse.com">Lern More</a></div>
+                </div>
+                <div class="newEvent">
+                    <p>Featured Event</p>
+                    <img src="./img/image 64.png" alt="Certified Maintenanace">
+                    <div class="date">December 13 -
+                        December 16, 2021
+                        Marco Island , Florida</div>
+                    <div class="newEventDate"><a href="https://www.rebelmouse.com">Lern More</a></div>
+                </div>
+            </section>
+            <section class="eventPosts">
+                <!--Event Posts-->
+                <section class="eventPostPosts">
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="post">
+                        <div class="insidePostContainer">
+                            <p class="postTdateAndLocation"><span><img src="./img/Calendar.png" alt="Calendar Icon"></span> January 1 2021 - December 31 2021</p>
+                            <p class="postTdateAndLocation"><span><img src="./img/Location.png" alt="Location Icon"></span> Marco Island, Florida 34145</p>
+                            <div class="postInfo">
+                                <img src="./img/PostImage.png" alt="Maintenance Manager (CMM) Workshops">
+                                <div class="titleAndType">
+                                    <h3>2021-Reliabilityweb.com Certified Maintenance Manager (CMM) Workshops</h3>
+                                    <p><a href="https://www.rebelmouse.com">Conference</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </section>
+
+                <!--Aside-->
+                <aside id="eventPostAdds">
+                    <img src="./img/AsideAdds.png" alt="">
+                </aside>
+            </section>
+        </section>
+    </main>
+    <!--Main-->
+
+<script>
+    /* Mobile Menu Display */
+    let burger_menu = document.getElementById("menu");
+    let nav_menu = document.getElementById("navMenu");
+    let close_menu = document.getElementById("close");
+
+    burger_menu.addEventListener("click", function(){
+        nav_menu.style.left ="0%";
+    });
+
+    close_menu.addEventListener("click", function(){
+        nav_menu.style.left ="-100%";
+    });
+    /* Mobile Menu Display End*/
+
+    /* Scroll position */
+    let event_post_adds = document.getElementById("eventPostAdds");
+    let adds_position = event_post_adds.offsetTop;
+    window.addEventListener("scroll", function() {
+        let scrollY = this.scrollY;
+        console.log(scrollY);
+
+        /*If the scroll position is equal or grater than the adds position, then the position of the element is set to sticky*/
+        if(scrollY >=adds_position){
+            event_post_adds.style.position = "sticky";
+            event_post_adds.style.top = "0";
+        }else{
+            event_post_adds.style.position = "static";
+        }
+
+
+
+    });
+
+
+
+</script>
+</body>
+</html>

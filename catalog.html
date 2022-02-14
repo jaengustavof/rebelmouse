@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        /*Loading styles and keyframes animation*/
+        #loading {
+            width: 2rem;
+            height: 2rem;
+            border: 5px solid #f3f3f3;
+            border-top: 6px solid #9c41f2;
+            border-radius: 100%;
+            margin: auto;
+            visibility: hidden;
+            animation: spin 1s infinite linear;
+        }
+        #loading.display {
+            visibility: visible;
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!--Search Input Section-->
+    <div id="search">
+        <input type="text" id="search_term">
+        <button id="search_button">Search</button>
+        <button id="reset">Reset</button>
+    </div>
+    <!--Search Input Section End-->
+    <hr>
+    <!--Image Container-->
+    <div id="image_container"></div>
+    <div id="loading"></div>
+    <!--Image Container End-->
+    <hr>
+    <!--Catalog Nav-->
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <ul style="display: flex; width: 15%; justify-content: space-between;" id="catalog_nav">
+        </ul>
+    </div>
+    <!--Catalog Nav End-->
+    
+    
+    <script>
+
+        let search_term = "";
+        let start = 0;
+        let end = 5;
+        let product_counter = 0;
+        let loader = document.getElementById("loading");
+
+        /*** Loading display and hide functions ***/
+        function displayLoading() {
+            loader.classList.add("display");
+            setTimeout(function(){
+                loader.classList.remove("display");
+            }, 5000);
+        }
+
+        function hideLoading() {
+            loader.classList.remove("display");
+        }
+        /*** Loading display and hide functions ***/
+
+        /************* Search function ***********/
+        function search(start,end,search_term){
+            displayLoading();/**loading display while fetch*/
+            fetch('https://api.airtable.com/v0/appElurJfZ2WmdIUg/Furniture/?api_key=keys1gmUsZYDi7y0g').then(function(response){
+                return response.json();
+
+            }).then(function(catalog) {    
+                hideLoading(); /**hide loading when getting a response**/
+
+                let image_container = document.getElementById("image_container");
+                let counter = start;
+
+                if(search_term == ""){
+                    /**In there is no search term**/
+                    while(counter < end){
+                        let new_image = document.createElement("img");
+                        let image = catalog['records'][counter]['fields']['Images'][0]['thumbnails']['large']['url'];
+                        let title = catalog['records'][counter]['fields']['Name'];
+                        new_image.src = image;
+                        new_image.title = title;
+                        new_image.width = 250;
+                        image_container.append(new_image);
+                        counter ++;
+                    }
+                }else {
+                    
+                    /**When there is a search term we compare all the names of the catalog with the term**/
+                    catalog['records'].forEach(function(){
+                        let product = catalog['records'][counter]['fields']['Name'];
+                        
+                        if(product.indexOf(search_term)>1){
+                            product_counter++;
+                            let new_image = document.createElement("img");
+                            let image = catalog['records'][counter]['fields']['Images'][0]['thumbnails']['large']['url'];
+                            let title = catalog['records'][counter]['fields']['Name'];
+                            new_image.src = image;
+                            new_image.title = title;
+                            new_image.width = 250;
+                            image_container.append(new_image);
+                        }
+                        counter++;
+                    });              
+                }
+
+                /***** Catalog Nav *****/
+                /*** Setting the amount of li items depending on the search ***/
+                let catalog_lenght;
+                if(search_term != ""){
+                    catalog_lenght = product_counter++;
+                }else{
+                    catalog_lenght = catalog['records'].length;
+                }             
+                let catalog_index = Math.ceil(catalog_lenght/5);
+                let catalog_index_counter = 1;
+                let catalog_nav = document.getElementById("catalog_nav");
+                while(catalog_index_counter <= catalog_index){
+                    let new_li = document.createElement("li");
+                    new_li.classList.add("navig");
+                    new_li.innerHTML= catalog_index_counter;
+                    catalog_nav.append(new_li);
+                    catalog_index_counter++;
+                }   
+
+                /*** Nav buttons will clear inner HTML from containers and set variables "start" and "end"***/
+                let navs = document.getElementsByClassName("navig");
+                document.querySelectorAll('.navig').forEach(item => {
+                    item.addEventListener('click', function(event) {
+                        image_container.innerHTML = "";
+                        catalog_nav.innerHTML = "";
+                        let end = (item.innerHTML)*5;
+                        let start = end-5;
+                        search(start,end, search_term);
+                        })
+                });    
+            });
+        }
+        /**Auto call function**/
+        search(start,end,search_term);
+
+        /***SearchButton / assigns the input value to the search_term variable, clears html and triggers search functions with new variables***/
+        let search_button = document.getElementById("search_button");
+        search_button.addEventListener('click', function(event){
+            image_container.innerHTML = "";
+            catalog_nav.innerHTML = "";
+            product_counter = 0;
+            search_term = document.getElementById("search_term").value;          
+            search(start,end,search_term);
+        });
+
+        /***ResetButton / clears all variables and triggers search funcion***/
+        let reset_button = document.getElementById("reset");
+        reset_button.addEventListener('click', function(event){
+            image_container.innerHTML = "";
+            catalog_nav.innerHTML = "";
+            product_counter = 0;
+            search_term = "";
+            search(start,end,search_term);
+        })
+       
+    </script>
+
+</body>
+</html>
